@@ -2,6 +2,11 @@ package com.duc.manager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cglib.core.Local;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -12,16 +17,30 @@ public class Products {
     private int Id;
 
     private String name;
-    private String brand;
     private double price;
 
     //@Column(columnDefinition = "TEXT")
-    private String description;
     private String imgFileName;
+
+    @LastModifiedDate
+    private LocalDate updateDate;
     private int stock;
     @OneToMany(mappedBy = "products")
     @JsonIgnore
     private List<OrderDetails> orderDetailsList;
+
+
+    public Products() {
+    }
+
+    public Products(int id, String name, double price, String imgFileName, int stock, List<OrderDetails> orderDetailsList) {
+        Id = id;
+        this.name = name;
+        this.price = price;
+        this.imgFileName = imgFileName;
+        this.stock = stock;
+        this.orderDetailsList = orderDetailsList;
+    }
 
     public int getStock() {
         return stock;
@@ -47,13 +66,6 @@ public class Products {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
 
     public String getImgFileName() {
         return imgFileName;
@@ -71,13 +83,6 @@ public class Products {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public List<OrderDetails> getOrderDetailsList() {
         return orderDetailsList;
@@ -85,5 +90,13 @@ public class Products {
 
     public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
         this.orderDetailsList = orderDetailsList;
+    }
+
+    public LocalDate getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 }

@@ -5,11 +5,13 @@ import com.duc.manager.dto.request.OrderCreationRequest;
 import com.duc.manager.entity.Orders;
 import com.duc.manager.entity.Products;
 import com.duc.manager.repository.OrderRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderService {
@@ -40,4 +42,10 @@ public class OrderService {
         return orderRepository.getRevenue();
     }
 
+    public Map<String, Object> getNumberOrderInMonth(){
+        return orderRepository.getNumberOrderInMonth();
+    }
+
+
 }
+

@@ -1,30 +1,19 @@
 package com.duc.manager.dto.request;
 
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 public class ProductCreationRequest {
 
 
     private String name;
-    private String brand;
     private double price;
-    private String description;
     private String imgFileName;
     private int stock;
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @LastModifiedDate
+    private LocalDate updateDate;
 
     public String getImgFileName() {
         return imgFileName;
@@ -56,6 +45,14 @@ public class ProductCreationRequest {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public LocalDate getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 }
 

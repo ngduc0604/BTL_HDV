@@ -22,6 +22,14 @@ public interface ProductRepository extends JpaRepository<Products,Integer>{
             "                  products ON order_details.id = products.id\n" +
             "group by products.name,order_details.id,products.id\n" +
             "order by sum(order_details.quantity) desc\n" +
-            "limit 5", nativeQuery = true)
+            "limit 10", nativeQuery = true)
     List<Map<String, Object>> getTop5();
+
+
+    @Query(value = "SELECT COUNT(*) AS SoSanPham\n" +
+            "FROM products\n" +
+            "WHERE YEAR(update_date) = YEAR(CURDATE())\n" +
+            "  AND MONTH(update_date) = MONTH(CURDATE());",nativeQuery = true)
+    int getProductInMonth();
+
 }

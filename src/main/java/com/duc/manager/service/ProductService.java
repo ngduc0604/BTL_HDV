@@ -1,18 +1,16 @@
 package com.duc.manager.service;
 
 import com.duc.manager.dto.request.ProductCreationRequest;
+import com.duc.manager.dto.request.ProductUpdateRequest;
 import com.duc.manager.entity.Products;
-import com.duc.manager.entity.TopSellProduct;
 import com.duc.manager.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -24,12 +22,10 @@ public class ProductService {
         Products product= new Products();
 
         product.setName(request.getName());
-        product.setBrand(request.getBrand());
-        product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
         product.setImgFileName(request.getImgFileName());
         product.setStock(request.getStock());
-
+        product.setUpdateDate(LocalDate.now());
         return productRepository.save(product);
 
     }
@@ -38,7 +34,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Products getProduct(int Id){
+    public Products getProductById(int Id){
         return productRepository.findById(Id).orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
@@ -46,20 +42,25 @@ public class ProductService {
         return productRepository.count();
     }
 
-    public Products updateProducts(int Id,ProductCreationRequest request){
-        Products product= getProduct(Id);
+    public Products updateProducts(int Id, ProductUpdateRequest request){
+        Products product= getProductById(Id);
         product.setName(request.getName());
-        product.setBrand(request.getBrand());
-        product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
-        product.setImgFileName(request.getImgFileName());
         product.setStock(request.getStock());
+        product.setUpdateDate(LocalDate.now());
        return productRepository.save(product);
-
     }
 
     public List<Map<String, Object>> getTop5(){
         return productRepository.getTop5();
+    }
+
+    public void deleteProduct(int Id){
+        productRepository.deleteById(Id);
+    }
+
+    public  int getProductInMonth(){
+        return productRepository.getProductInMonth();
     }
 
 }

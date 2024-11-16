@@ -2,7 +2,9 @@ package com.duc.manager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +14,8 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int order_id;
 
-    private Date order_date;
+    @LastModifiedDate
+    private LocalDate order_date;
     private String status;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
@@ -32,11 +35,11 @@ public class Orders {
         this.order_id = order_id;
     }
 
-    public Date getOrder_date() {
+    public LocalDate getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(LocalDate order_date) {
         this.order_date = order_date;
     }
 

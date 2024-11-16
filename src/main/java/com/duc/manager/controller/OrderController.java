@@ -1,8 +1,8 @@
 package com.duc.manager.controller;
-import com.duc.manager.dto.request.CustomerCreationRequest;
+
 import com.duc.manager.dto.request.OrderCreationRequest;
 import com.duc.manager.entity.Orders;
-import com.duc.manager.service.CustomerService;
+
 import com.duc.manager.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,12 +37,18 @@ public class OrderController {
         return orderService.getRevenue();
     }
 
+
     @GetMapping("/total_revenue")
     public ResponseEntity<Map<String, Double>> getTotalRevenue() {
         double totalRevenue = orderService.getRevenue();
         Map<String, Double> response = new HashMap<>();
         response.put("totalRevenue", totalRevenue);
         return ResponseEntity.ok(response);
-        }
+    }
+
+    @GetMapping("getNumberOrderInMonth")
+    public Map<String, Object> getNumberOrderInMonth(){
+        return orderService.getNumberOrderInMonth();
+    }
 
 }

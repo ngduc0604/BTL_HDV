@@ -4,18 +4,20 @@ import com.duc.manager.entity.Customers;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class OrderCreationRequest {
-    private Date order_date;
+    private LocalDate order_date;
     private String status;
     private Customers customer;
     private double totalMoney;
-    public Date getOrder_date() {
+    public LocalDate getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(LocalDate order_date) {
         this.order_date = order_date;
     }
 
