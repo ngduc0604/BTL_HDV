@@ -30,6 +30,7 @@ public class Products {
     private List<OrderDetails> orderDetailsList;
 
 
+
     public Products() {
     }
 
@@ -99,4 +100,5 @@ public class Products {
     public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
+
 }

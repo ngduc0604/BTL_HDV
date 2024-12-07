@@ -19,6 +19,15 @@ public class Customers {
     @JsonIgnore
     private List<Orders> ordersList;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    private Accounts account;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "customers", cascade = CascadeType.ALL)
+    private Carts cart;
+
+
     public String getName() {
         return name;
     }
@@ -65,5 +74,21 @@ public class Customers {
 
     public void setOrdersList(List<Orders> ordersList) {
         this.ordersList = ordersList;
+    }
+
+    public Accounts getAccount() {
+        return account;
+    }
+
+    public void setAccount(Accounts account) {
+        this.account = account;
+    }
+
+    public Carts getCart() {
+        return cart;
+    }
+
+    public void setCart(Carts cart) {
+        this.cart = cart;
     }
 }

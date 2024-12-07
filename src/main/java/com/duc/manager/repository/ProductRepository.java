@@ -15,7 +15,7 @@ import java.util.Objects;
 @Repository
 public interface ProductRepository extends JpaRepository<Products,Integer>{
 
-    @Query(value = "SELECT  products.id as id ,products.name as name," +
+    @Query(value = "SELECT  products.img_file_name as imgFileName ,products.name as name,products.id as id," +
             "products.price as price ,sum(order_details.quantity) as quantity ," +
             "products.price*sum(order_details.quantity)as total\n" +
             "FROM     order_details JOIN\n" +

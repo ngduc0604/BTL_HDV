@@ -10,6 +10,7 @@ import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class OrderService {
     public Orders createOrder(OrderCreationRequest request){
         Orders order= new Orders();
         order.setCustomers(request.getCustomer());
-        order.setOrder_date(request.getOrder_date());
+        order.setOrder_date(LocalDate.now());
         order.setStatus(request.getStatus());
         order.setTotalMoney(request.getTotalMoney());
         return orderRepository.save(order);
