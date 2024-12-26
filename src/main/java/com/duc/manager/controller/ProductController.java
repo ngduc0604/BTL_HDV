@@ -63,4 +63,12 @@ public class ProductController {
         return  ResponseEntity.ok(response);
     }
 
+    //loc san pham theo gia
+    @GetMapping("/productPrice")
+    public ResponseEntity<List<Products>> productPrice(@RequestParam(required = false) Double minPrice,
+                                                       @RequestParam(required = false)  Double maxPrice){
+        List<Products> findProductByPrice = productService.productByPrice(minPrice, maxPrice);
+        return ResponseEntity.ok(findProductByPrice);
+
+    }
 }

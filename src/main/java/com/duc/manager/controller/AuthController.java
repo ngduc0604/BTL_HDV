@@ -1,6 +1,8 @@
 package com.duc.manager.controller;
 
+import com.duc.manager.dto.request.AccountCreationRequest;
 import com.duc.manager.dto.request.LoginRequest;
+import com.duc.manager.dto.response.CreateAccResponse;
 import com.duc.manager.dto.response.LoginResponse;
 import com.duc.manager.entity.Accounts;
 import com.duc.manager.service.AccountService;
@@ -22,6 +24,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         LoginResponse response = accountService.login(request.getUsername(), request.getPassword());
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/createAcc")
+    public ResponseEntity<CreateAccResponse> createAcc(@RequestBody AccountCreationRequest request){
+        CreateAccResponse response= accountService.createAccount(request.getUserName(),request.getPassword());
         return ResponseEntity.ok(response);
     }
 

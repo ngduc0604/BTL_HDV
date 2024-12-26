@@ -63,4 +63,20 @@ public class ProductService {
         return productRepository.getProductInMonth();
     }
 
+    //loc san pham theo gia
+    public List<Products> productByPrice(Double minPrice, Double maxPrice){
+        List<Products> a;
+        if(minPrice == null && maxPrice == null){
+            a = productRepository.findAll();
+        }
+        if(minPrice == null){
+            minPrice = 0.0;
+        }
+        if(maxPrice == null){
+            maxPrice = Double.MAX_VALUE;
+        }
+        a = productRepository.findProductByPrice(minPrice, maxPrice);
+        return a;
+
+    }
 }

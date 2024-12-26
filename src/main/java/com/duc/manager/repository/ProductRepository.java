@@ -36,5 +36,10 @@ public interface ProductRepository extends JpaRepository<Products,Integer>{
     @Query(value = "SELECT * FROM products WHERE id=:id",nativeQuery = true)
     Products findProductsById(@Param("id")int id);
 
+    //loc theo khoang gia
+    @Query(value = "SELECT * FROM products\n" +
+            "WHERE price >= ? AND price <= ?\n",nativeQuery = true)
+    List<Products> findProductByPrice(Double minPrice, Double maxPrice);
+
 
 }

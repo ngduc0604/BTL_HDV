@@ -36,9 +36,7 @@ public class CartDetailsController {
 
     @DeleteMapping("deleleCartById/{id}")
     public void delete(@PathVariable int id){
-        cartDetailsService.getCartDetailsById(id);
+        cartDetailsService.deleteCartDetails(id);
     }
-
-
 
 }

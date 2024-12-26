@@ -41,6 +41,10 @@ public class CartDetailsService {
    public CartDetails updateQuantity(int id, CartDetailsRequest request){
         CartDetails cartDetails= getCartDetailsById(id);
         cartDetails.setQuantity(request.getQuantity());
+        Products products=new Products();
+        products=cartDetails.getProduct();
+        double newtotal=products.getPrice()* request.getQuantity();
+        cartDetails.setTotalPrice(newtotal);
         return cartDetailsRepository.save(cartDetails);
     }
 
