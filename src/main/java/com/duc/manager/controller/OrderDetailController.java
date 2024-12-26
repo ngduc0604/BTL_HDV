@@ -5,10 +5,8 @@ import com.duc.manager.entity.OrderDetails;
 import com.duc.manager.repository.OrderDetailsRepository;
 import com.duc.manager.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class OrderDetailController {
@@ -19,4 +17,6 @@ public class OrderDetailController {
     public OrderDetails createOrderDetails(@RequestBody OrderDetailCreationRequest request){
         return orderDetailService.createOrderDetails(request);
     }
+
+
 }

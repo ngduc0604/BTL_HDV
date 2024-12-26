@@ -19,7 +19,7 @@ public class Accounts {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account",cascade = CascadeType.ALL)
     private Customers customer;
 
     public int getAccount_id() {

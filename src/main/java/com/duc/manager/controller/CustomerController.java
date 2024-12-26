@@ -43,5 +43,7 @@ public class CustomerController {
     public List<Map<String, Object>> classifyCustomersByTotalSpent(){
         return customerService.classifyCustomersByTotalSpent();
     }
+
+
 }
 

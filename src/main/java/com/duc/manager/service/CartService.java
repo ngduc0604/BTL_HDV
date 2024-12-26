@@ -1,6 +1,7 @@
 package com.duc.manager.service;
 
 import com.duc.manager.entity.Carts;
+import com.duc.manager.entity.Customers;
 import com.duc.manager.repository.CartRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,11 @@ public class CartService {
 
     public Carts findCartByCustomerId(int customerId){
         return cartRepositoy.findCartByCustomerId(customerId);
+    }
+
+    public void createCartByCusId(Customers customers){
+        Carts carts=new Carts();
+        carts.setCustomers(customers);
+        cartRepositoy.save(carts);
     }
 }

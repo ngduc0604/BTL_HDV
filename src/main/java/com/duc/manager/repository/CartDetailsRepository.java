@@ -23,4 +23,6 @@ public interface CartDetailsRepository extends JpaRepository<CartDetails,Integer
         @Query(value = "SELECT * FROM cart_details WHERE cart_id = :cartId AND product_id = :productId", nativeQuery = true)
         Optional<CartDetails> findByCartIdAndProductId(@Param("cartId") int cartId, @Param("productId") int productId);
 
+        @Query(value = "select * FROM cart_details WHERE cart_id = :cart_id",nativeQuery = true)
+        List<Map<String,Object>> getByCartId(@Param("cart_id") int cart_id);
 }

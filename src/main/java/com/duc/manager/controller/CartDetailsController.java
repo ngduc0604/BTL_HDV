@@ -39,4 +39,8 @@ public class CartDetailsController {
         cartDetailsService.deleteCartDetails(id);
     }
 
+    @GetMapping("/getByCartId/{cart_id}")
+    public List<Map<String,Object>> getByCartId(@PathVariable int cart_id){
+        return cartDetailsService.getByCartId(cart_id);
+    }
 }

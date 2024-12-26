@@ -1,6 +1,7 @@
 package com.duc.manager.service;
 
 import com.duc.manager.dto.request.OrderDetailCreationRequest;
+import com.duc.manager.entity.CartDetails;
 import com.duc.manager.entity.OrderDetails;
 import com.duc.manager.entity.Orders;
 import com.duc.manager.entity.Products;
@@ -40,5 +41,6 @@ public class OrderDetailService {
         orderDetails.setTotal(request.getTotal());
         return orderDetailsRepository.save(orderDetails);
     }
+
 
 }

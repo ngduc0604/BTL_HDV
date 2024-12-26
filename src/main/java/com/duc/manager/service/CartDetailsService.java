@@ -76,4 +76,8 @@ public class CartDetailsService {
         cartDetailsRepository.deleteById(id);
    }
 
+   public List<Map<String,Object>> getByCartId(int cart_id){
+        return cartDetailsRepository.getByCartId(cart_id);
+   }
+
 }
