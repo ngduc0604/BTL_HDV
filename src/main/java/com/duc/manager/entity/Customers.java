@@ -1,6 +1,7 @@
 package com.duc.manager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,16 +16,18 @@ public class Customers {
     private String email ;
     private String phone ;
     private String address;
-    @OneToMany(mappedBy ="customers")
+    @OneToMany(mappedBy ="customers",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Orders> ordersList;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
+    @JsonIgnore
     private Accounts account;
 
     @JsonIgnore
     @OneToOne(mappedBy = "customers", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Carts cart;
 
 

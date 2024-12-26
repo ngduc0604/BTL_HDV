@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CustomerService {
@@ -30,5 +31,13 @@ public class CustomerService {
 
     public Customers getCustomer(int Id){
         return CustomerRepository.findById(Id).orElseThrow(() -> new RuntimeException("Customer not found"));
+    }
+
+    public long getNumberOfCustomer(){
+        return CustomerRepository.count();
+    }
+
+    public List<Map<String, Object>> classifyCustomersByTotalSpent(){
+        return CustomerRepository.classifyCustomersByTotalSpent();
     }
 }

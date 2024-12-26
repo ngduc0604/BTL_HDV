@@ -9,17 +9,10 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class OrderCreationRequest {
-    private LocalDate order_date;
-    private String status;
-    private Customers customer;
-    private double totalMoney;
-    public LocalDate getOrder_date() {
-        return order_date;
-    }
 
-    public void setOrder_date(LocalDate order_date) {
-        this.order_date = order_date;
-    }
+    private String status;
+    private int customer_id;
+    private double totalMoney;
 
     public String getStatus() {
         return status;
@@ -29,12 +22,12 @@ public class OrderCreationRequest {
         this.status = status;
     }
 
-    public Customers getCustomer() {
-        return customer;
+    public int getCustomer_id() {
+        return customer_id;
     }
 
-    public void setCustomer(Customers customer) {
-        this.customer = customer;
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public double getTotalMoney() {
@@ -42,6 +35,7 @@ public class OrderCreationRequest {
     }
 
     public void setTotalMoney(double totalMoney) {
+
         this.totalMoney = totalMoney;
     }
 }

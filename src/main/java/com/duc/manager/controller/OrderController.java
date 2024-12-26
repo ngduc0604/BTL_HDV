@@ -1,6 +1,9 @@
 package com.duc.manager.controller;
 
 import com.duc.manager.dto.request.OrderCreationRequest;
+import com.duc.manager.dto.request.OrderDetailDTO;
+import com.duc.manager.dto.request.OrderUpdateRequest;
+import com.duc.manager.entity.Carts;
 import com.duc.manager.entity.Orders;
 
 import com.duc.manager.service.OrderService;
@@ -36,7 +39,10 @@ public class OrderController {
     double getRevenue(){
         return orderService.getRevenue();
     }
-
+    @PutMapping("/updateOrder/{Id}")
+    Orders updateOrder(@RequestBody OrderUpdateRequest request, @PathVariable int Id){
+        return orderService.updateOrders(Id,request);
+    }
 
     @GetMapping("/total_revenue")
     public ResponseEntity<Map<String, Double>> getTotalRevenue() {
@@ -49,6 +55,40 @@ public class OrderController {
     @GetMapping("getNumberOrderInMonth")
     public Map<String, Object> getNumberOrderInMonth(){
         return orderService.getNumberOrderInMonth();
+    }
+
+    @DeleteMapping("deleteOrder/{Id}")
+    void deleteOrder(@PathVariable int Id){
+        orderService.deleteOrder(Id);
+    }
+
+    @GetMapping("/orders/total-money-weekly")
+    public Map<String, Object> getTotalMoneyInMonth() {
+        // Gọi hàm service để lấy dữ liệu tổng tiền các tuần
+        return orderService.getTotalMoneyInMonth();
+    }
+    @GetMapping("/details")
+    public List<Map<String, Object>> getOrderDetails() {
+        return orderService.getOrderDetails();
+    }
+
+    @GetMapping("getorderdetail/{orderId}")
+    public ResponseEntity<OrderDetailDTO> getOrderDetails(@PathVariable Long orderId) {
+        OrderDetailDTO orderDetail = orderService.getOrderDetails(orderId);
+        return ResponseEntity.ok(orderDetail);
+    }
+
+    @GetMapping("getTotalOrderInAMonth")
+    public ResponseEntity<Map<String, Integer>> getTotalOrderInAMonth(){
+        int result=orderService.getTotalOrderInAMonth();
+        Map<String, Integer> response = new HashMap<>();
+        response.put("totalOrder", result);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("getOrderByCusId/{customer_id}")
+    public List<Map<String, Carts>> getOrderByCusId(@PathVariable int customer_id){
+        return orderService.getOrderByCusId(customer_id);
     }
 
 }

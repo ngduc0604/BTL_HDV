@@ -19,4 +19,36 @@ public class CartDetails {
     private int quantity;
 
     private Double totalPrice;
+
+    public Carts getCart() {
+        return cart;
+    }
+
+    public void setCart(Carts cart) {
+        this.cart = cart;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }
