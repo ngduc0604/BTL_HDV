@@ -1,21 +1,31 @@
 package com.duc.manager.service;
 
+import com.duc.manager.dto.request.CartDetailsRequest;
 import com.duc.manager.dto.request.ProductCreationRequest;
 import com.duc.manager.dto.request.ProductUpdateRequest;
 import com.duc.manager.entity.Products;
+import com.duc.manager.repository.CartDetailsRepository;
+import com.duc.manager.repository.OrderDetailsRepository;
 import com.duc.manager.repository.ProductRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.ansi.Ansi8BitColor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderDetailsRepository orderDetailsRepository;
+
+    @Autowired
+    private CartDetailsRepository cartDetailsRepository;
 
 
     public Products createProduct(ProductCreationRequest request){
@@ -56,7 +66,21 @@ public class ProductService {
     }
 
     public void deleteProduct(int Id){
-        productRepository.deleteById(Id);
+        List<Integer>  list_id=orderDetailsRepository.findOderDetailsByProduct_Id(Id);
+        List<Integer> list_cart=cartDetailsRepository.findCartDetailsByProduct_Id(Id);
+        Set<Integer> list= new LinkedHashSet<>();
+        list.addAll(list_id);
+        list.addAll(list_cart);
+        List<Integer> result = new ArrayList<>(list);
+        if(result.size()==0){
+
+        }else{
+            for(Integer od_id : list){
+                cartDetailsRepository.deleteById(od_id);
+                orderDetailsRepository.deleteById(od_id);
+            }
+            productRepository.deleteById(Id);
+        }
     }
 
     public  int getProductInMonth(){

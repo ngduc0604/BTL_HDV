@@ -1,7 +1,10 @@
 package com.duc.manager.controller;
 
 import com.duc.manager.dto.request.CustomerCreationRequest;
+import com.duc.manager.dto.request.CustomerUpdateRequest;
+import com.duc.manager.dto.request.ProductUpdateRequest;
 import com.duc.manager.entity.Customers;
+import com.duc.manager.entity.Products;
 import com.duc.manager.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +47,9 @@ public class CustomerController {
         return customerService.classifyCustomersByTotalSpent();
     }
 
-
+    @PutMapping("/updateCustomerInfo/{Id}")
+    Customers updateCustomer(@RequestBody CustomerUpdateRequest request, @PathVariable int Id){
+        return customerService.updateCustomer(Id,request);
+    }
 }
 

@@ -1,7 +1,9 @@
 package com.duc.manager.controller;
 
 import com.duc.manager.dto.request.AccountCreationRequest;
+import com.duc.manager.dto.request.ChangePasswordRequest;
 import com.duc.manager.dto.request.LoginRequest;
+import com.duc.manager.dto.response.ChangePasswordResponse;
 import com.duc.manager.dto.response.CreateAccResponse;
 import com.duc.manager.dto.response.LoginResponse;
 import com.duc.manager.entity.Accounts;
@@ -54,6 +56,29 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/createAdminAccount")
+    public ResponseEntity<?> createAdminAccount(@RequestBody AccountCreationRequest request) {
+        try {
+            Accounts account = accountService.createAdminAccount(
+                    request.getPassword(),
+                    request.getUsername(),
+                    request.getAddress(),
+                    request.getEmail(),
+                    request.getName(),
+                    request.getPhone()
+            );
+            return ResponseEntity.ok(account);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e){
+            return ResponseEntity.status(500).body("Internal Server Error: " + e.getMessage());
+        }
+    }
+    @PutMapping("/changePassword/{customerId}")
+    public ResponseEntity<ChangePasswordResponse> changePassword(@RequestBody ChangePasswordRequest request,@PathVariable int customerId){
+        ChangePasswordResponse response= accountService.updatePassword(customerId, request.getPassword(),request.getNewPassword());
+        return ResponseEntity.ok(response);
+    }
 }
 
 

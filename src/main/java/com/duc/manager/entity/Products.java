@@ -25,7 +25,7 @@ public class Products {
     @LastModifiedDate
     private LocalDate updateDate;
     private int stock;
-    @OneToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "products",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
     private List<OrderDetails> orderDetailsList;
 
